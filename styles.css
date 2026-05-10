@@ -260,16 +260,143 @@ tbody tr:last-child td { border-bottom: none; }
   gap: 20px;
 }
 
+/* ---------- Responsive ---------- */
+
+/* Tablets: apilar gráficos pero mantener layout horizontal de filas */
 @media (max-width: 900px) {
   .charts { grid-template-columns: 1fr; }
-  .ingresos-header, .ingreso-row {
-    grid-template-columns: 1fr;
+}
+
+/* Móviles: rediseño completo */
+@media (max-width: 640px) {
+  .container {
+    padding: 20px 14px 48px;
   }
+
+  h1 { font-size: 1.7rem; }
+  .subtitle { font-size: 0.95rem; }
+  h2 { font-size: 1.1rem; }
+
+  .panel {
+    padding: 18px 16px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .config-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Header de columnas: oculto. Las filas se vuelven cards */
   .ingresos-header { display: none; }
+
   .ingreso-row {
+    grid-template-columns: 1fr 44px;
+    grid-template-areas:
+      "name   remove"
+      "amount amount"
+      "date   date";
     background: var(--bg-row);
-    padding: 12px;
-    border-radius: 6px;
+    padding: 14px;
+    border-radius: 8px;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .ingreso-row .ing-name   { grid-area: name; }
+  .ingreso-row .ing-amount { grid-area: amount; }
+  .ingreso-row .ing-date   { grid-area: date; }
+  .ingreso-row .btn-remove { grid-area: remove; height: 100%; min-height: 44px; }
+
+  /* iOS: font-size >= 16px en inputs evita el auto-zoom al hacer focus */
+  input, select {
+    padding: 12px 14px;
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    padding: 12px 18px;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 16px 18px;
+  }
+
+  .card .value {
+    font-size: 1.4rem;
+  }
+
+  /* Tabla del desglose: scroll horizontal — más legible que comprimir */
+  #breakdown {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -16px;
+    padding: 0 16px 4px;
+  }
+
+  table {
+    min-width: 540px;
+  }
+
+  thead th, tbody td {
+    padding: 10px 12px;
+    font-size: 0.88rem;
+  }
+
+  .bar-wrapper {
+    min-width: 130px;
+  }
+
+  .charts { gap: 14px; }
+
+  .chart-container {
+    padding: 14px;
+  }
+
+  .canvas-wrap {
+    height: 260px;
+  }
+
+  footer code {
+    display: inline-block;
+    word-break: break-all;
+    font-size: 0.78rem;
+    margin-top: 6px;
+  }
+}
+
+/* Móviles chicos (iPhone SE y similares) */
+@media (max-width: 380px) {
+  .container {
+    padding: 16px 10px 40px;
+  }
+
+  h1 { font-size: 1.5rem; }
+
+  .panel {
+    padding: 14px 12px;
+  }
+
+  .card .value {
+    font-size: 1.25rem;
+  }
+
+  .canvas-wrap {
+    height: 240px;
   }
 }
 
