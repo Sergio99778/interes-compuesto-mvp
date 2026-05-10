@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caja de Ahorro · Interés Compuesto</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💰 Caja de Ahorro</h1>
+      <p class="subtitle">Calculá tu capital con interés compuesto y mirá cómo aporta cada peso</p>
+    </header>
+
+    <section class="panel">
+      <h2>Configuración global</h2>
+      <div class="config-grid">
+        <label>
+          <span>Tasa anual (%)</span>
+          <input type="number" id="rate" value="40" step="0.1" min="0">
+        </label>
+        <label>
+          <span>Capitalización</span>
+          <select id="frequency">
+            <option value="365">Diaria</option>
+            <option value="12" selected>Mensual</option>
+            <option value="4">Trimestral</option>
+            <option value="2">Semestral</option>
+            <option value="1">Anual</option>
+          </select>
+        </label>
+        <label>
+          <span>Fecha objetivo</span>
+          <input type="date" id="targetDate">
+        </label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Ingresos en la caja</h2>
+        <button id="addIngreso" class="btn-primary">+ Agregar ingreso</button>
+      </div>
+      <div class="ingresos-header">
+        <span>Concepto</span>
+        <span>Monto</span>
+        <span>Fecha de depósito</span>
+        <span></span>
+      </div>
+      <div id="ingresosList"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Resultados</h2>
+      <div class="summary">
+        <div class="card">
+          <span class="label">Capital inicial aportado</span>
+          <span class="value" id="totalInitial">$0</span>
+        </div>
+        <div class="card highlight">
+          <span class="label">Capital final a la fecha objetivo</span>
+          <span class="value" id="totalFinal">$0</span>
+        </div>
+        <div class="card success">
+          <span class="label">Rendimiento generado</span>
+          <span class="value" id="totalGain">$0</span>
+          <span class="sublabel" id="totalGainPct">0%</span>
+        </div>
+      </div>
+
+      <div id="breakdown"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Visualizaciones</h2>
+      <div class="charts">
+        <div class="chart-container">
+          <h3>Aporte de cada ingreso al capital final</h3>
+          <div class="canvas-wrap"><canvas id="pieChart"></canvas></div>
+        </div>
+        <div class="chart-container">
+          <h3>Evolución del capital en el tiempo</h3>
+          <div class="canvas-wrap"><canvas id="lineChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Fórmula: <code>A = P × (1 + r/n)<sup>n×t</sup></code> aplicada por cada ingreso desde su fecha de depósito.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
